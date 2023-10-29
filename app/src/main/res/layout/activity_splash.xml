@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".splash"
+    android:background="#03E2FF"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mr. Notes"
+        android:id="@+id/Notes"
+        android:fontFamily="sans-serif-condensed"
+        android:textStyle="bold"
+        android:textColor="#FBFBFB"
+        android:textSize="25dp"
+        android:gravity="center_horizontal"/>
+
+    <ProgressBar
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/Notes"
+        android:indeterminateTint="#FFFFFF"
+        android:layout_marginTop="18dp"
+        android:foregroundGravity="center_horizontal" />
+
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="App_theme">#f6ffd2</color>
+    <color name="Text">#AE95AF</color>
+    <color name="icons">#4F5D1B</color>
+    <color name="background">#5C4D5D
+    </color>
+    <color name="Error">#FF0000</color>
+    <color name="sucess">#19FF00</color>
+</resources>
