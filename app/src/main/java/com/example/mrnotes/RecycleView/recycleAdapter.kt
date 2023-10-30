@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mrnotes.AddNotesPage
 import com.example.mrnotes.R
@@ -17,6 +18,7 @@ class recycleAdapter(var list1:List<NoteApp>):RecyclerView.Adapter<recycleAdapte
     class ViewItems(view: View):RecyclerView.ViewHolder(view)  {
         var tittle: TextView = view.findViewById(R.id.TittleBar)
         var content: TextView = view.findViewById(R.id.contentBar)
+        var view : CardView=view.findViewById(R.id.view)
         var update: ImageButton = view.findViewById(R.id.updateBtn)
         var delete: ImageButton = view.findViewById(R.id.deletebtn)
 
@@ -57,6 +59,16 @@ class recycleAdapter(var list1:List<NoteApp>):RecyclerView.Adapter<recycleAdapte
                 var id = list1[position].id
                 putExtra("Delete", note.id)
                 Log.d("mukesh id", "${id}")
+            }
+
+            holder.itemView.context.startActivity(intent)
+        }
+
+        holder.view.setOnClickListener {
+            var intent = Intent(holder.itemView.context, AddNotesPage::class.java).apply {
+                var id = list1[position].id
+                putExtra("view", note.id)
+                Log.d("mukesh id kkk", "${id}")
             }
 
             holder.itemView.context.startActivity(intent)

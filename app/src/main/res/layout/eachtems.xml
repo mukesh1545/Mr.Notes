@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
@@ -18,24 +19,24 @@
 
         <LinearLayout
             android:id="@+id/line"
-            android:background="#37D7ED"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="0dp"
-            android:paddingTop="10dp"
             android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:background="#37D7ED"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/TittleBar"
-                android:singleLine="true"
-                android:ellipsize="end"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:ellipsize="end"
                 android:hint="Tittle"
-                android:text="vvvirir3hvbijwnihbvefdnwc fehejdwojfeiheijdwokjefihjwkofjekwjfijwkcefhjiwdefhwijhfwdjcfhdfd"
                 android:padding="10dp"
+                android:singleLine="true"
+                android:text="vvvirir3hvbijwnihbvefdnwc fehejdwojfeiheijdwokjefihjwkofjekwjfijwkcefhjiwdefhwijhfwdjcfhdfd"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -62,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_below="@id/line"
+            android:singleLine="true"
             android:layout_marginTop="-14dp"
             android:background="@drawable/eachitemview"
             android:hint="Content"

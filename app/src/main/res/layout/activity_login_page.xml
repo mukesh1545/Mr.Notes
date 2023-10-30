@@ -84,16 +84,40 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="15dp" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgetPAssword"
+            android:text="Forgot Password"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:textColor="#0CD1EA"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@id/Login_Password"/>
         <Button
             android:id="@+id/btn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@id/Login_Password"
-            android:layout_marginTop="23dp"
+            android:layout_below="@id/forgetPAssword"
+            android:layout_marginTop="25dp"
+
             android:backgroundTint="#1EDBF3"
             android:text="Login"
             android:textSize="20sp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/passwordbtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/forgetPAssword"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="#1EDBF3"
+            android:text="Submit"
+            android:textSize="20sp"
+            android:visibility="gone"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             android:textColor="@color/black"/>
@@ -112,6 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ProgrssBar"
             android:gravity="center"
+            android:id="@+id/line"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
             <TextView

@@ -10,11 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:layout_centerVertical="true"
+        android:windowSoftInputMode="adjustResize"
         android:theme="@style/Theme.MrNotes"
         tools:targetApi="31">
-        <activity
-            android:name=".upadateNotes"
-            android:exported="false" />
         <activity
             android:name=".AddNotesPage"
             android:exported="false" />

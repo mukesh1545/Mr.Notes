@@ -24,7 +24,7 @@ class AddNotesPage : AppCompatActivity() {
         var uid = FirebaseAuth.getInstance().currentUser!!.uid
 
 
-        ///checking whether the intent is coming or not
+        ///Edit note
         var Id = intent.getIntExtra("id123", -1)
 
         if (intent.hasExtra("id123")) {
@@ -74,7 +74,46 @@ class AddNotesPage : AppCompatActivity() {
             }
         }
 
-        ///
+
+        ///view the note
+        var Id2 = intent.getIntExtra("view", -1)
+
+        if (intent.hasExtra("view")) {
+            binding.saveButton.visibility = View.VISIBLE
+            binding.deletebtn1.visibility = View.GONE
+
+
+            binding.AddNote.setText("Note")
+            var db = NoteDataBase.getInstances(this)
+            var dao = db!!.NoteDao()
+
+            GlobalScope.launch {
+                var List = dao.getdetails(Id2)
+                Log.d("mukesh List", "${List}")
+                withContext(Dispatchers.Main)
+                {
+
+                    binding.TittleBar.setText("${List.Name}")
+                    binding.contentBar.setText("${List.content}")
+                }
+                binding.saveButton.setOnClickListener {
+
+                    GlobalScope.launch {
+                        dao.getdetails(Id2)
+
+                        withContext(Dispatchers.Main)
+                        {
+                            Toast.makeText(this@AddNotesPage, " Mr.Note", Toast.LENGTH_SHORT).show()
+                            finish()
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+        ///  delete note
         var Id1 = intent.getIntExtra("Delete", -1)
 
         if (intent.hasExtra("Delete")) {
@@ -91,7 +130,6 @@ class AddNotesPage : AppCompatActivity() {
                 Log.d("mukesh List", "${List}")
                 withContext(Dispatchers.Main)
                 {
-                    var tittle = List
                     binding.TittleBar.setText("${List.Name}")
                     binding.contentBar.setText("${List.content}")
                 }
@@ -126,7 +164,7 @@ class AddNotesPage : AppCompatActivity() {
                     Toast.makeText(this@AddNotesPage,"Enter the valid fields",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                Log.d("mukesh", "$content")
+                //Log.d("mukesh", "$content")
 
 
                 var databse = NoteDataBase.getInstances(this)

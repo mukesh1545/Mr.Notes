@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.media3.common.util.UnstableApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mrnotes.RecycleView.recycleAdapter
@@ -42,10 +43,19 @@ import kotlinx.coroutines.withContext
         }
 
         binding.Logout.setOnClickListener {
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show()
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this@NotePage, Login_Page::class.java))
-            finish()
+
+            val alert = AlertDialog.Builder(this)
+                .setTitle("Log out")
+                .setMessage("Do you want to Logout ?")
+                .setPositiveButton("Yes")
+                { p0, p1 ->
+                    Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this@NotePage, Login_Page::class.java))
+                    finish()
+                }
+                .setNegativeButton("No",null)
+                .show()
         }
 
         binding.rec.layoutManager = LinearLayoutManager(this)
