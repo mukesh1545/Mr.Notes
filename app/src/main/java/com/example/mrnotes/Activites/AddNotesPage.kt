@@ -43,7 +43,7 @@ class AddNotesPage : AppCompatActivity() {
                     binding.TittleBar.setText("${list.Name}")
                     binding.contentBar.setText("${list.content}")
 
-                binding.EditBtn.setOnClickListener {
+                    binding.EditBtn.setOnClickListener {
 
                     var details1 = NoteApp(
                         id,
@@ -59,10 +59,31 @@ class AddNotesPage : AppCompatActivity() {
                 }
             }
         }
-        
+          ///view the notes
+        if (intent.hasExtra("View")) {
+            var id = intent.getIntExtra("View", -1)
+            if (id == -1) {
+                finish()
+                return
+            }
+            binding.saveButton.visibility = View.GONE
+            binding.EditBtn.visibility = View.VISIBLE
+            binding.AddNote.setText("View Note")
+            CoroutineScope(Dispatchers.IO).launch {
+                val list = viewModel.getDeatilsById(applicationContext, id)
+                withContext(Dispatchers.Main)
+                {
+                    binding.TittleBar.setText("${list.Name}")
+                    binding.contentBar.setText("${list.content}")
+                }
+                binding.EditBtn.setOnClickListener {
+                    finish()
+                }
+            }
+        }
+
+            //save button
             binding.saveButton.setOnClickListener {
-
-
                 val details = NoteApp(0,
                     uid,
                     binding.TittleBar.text.toString(),

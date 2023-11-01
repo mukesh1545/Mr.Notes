@@ -9,7 +9,6 @@ import com.example.mrnotes.RoomData.NoteApp
 import com.example.mrnotes.RoomData.NoteDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 

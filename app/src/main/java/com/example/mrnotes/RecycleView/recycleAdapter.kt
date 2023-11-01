@@ -67,16 +67,16 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
 
         }
 
-//        holder.view.setOnClickListener {
-//            var intent = Intent(holder.itemView.context, AddNotesPage::class.java).apply {
-//                var id = list1[position].id
-//                putExtra("view", note.id)
-//                Log.d("mukesh id kkk", "${id}")
-//            }
-//
-//            holder.itemView.context.startActivity(intent)
-//        }
-//    }
+        ///view the notes
+        holder.view.setOnClickListener {
+            var intent = Intent(holder.itemView.context, AddNotesPage::class.java).apply {
+                var id = list1[position].id
+                putExtra("View", note.id)
+                Log.d("mukesh id kkk", "${id}")
+            }
+
+            holder.itemView.context.startActivity(intent)
+        }
 
 
     }
