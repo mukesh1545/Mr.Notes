@@ -1,4 +1,4 @@
-package com.example.mrnotes
+package com.example.mrnotes.Activites
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +7,15 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.media3.common.util.UnstableApi
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mrnotes.RecycleView.recycleAdapter
 import com.example.mrnotes.RoomData.NoteDataBase
+import com.example.mrnotes.ViewModel.NotesViewModel
 import com.example.mrnotes.databinding.ActivityNotePageBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +24,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
  class NotePage : AppCompatActivity() {
+
+
+     //intilaizing
     private lateinit var binding: ActivityNotePageBinding
     private lateinit var adapter: recycleAdapter
+    private lateinit var notesviewModel:NotesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -28,20 +37,21 @@ import kotlinx.coroutines.withContext
         binding = ActivityNotePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var id: String? = intent.getStringExtra("id")
+        //Displaying the Email id
         var user = FirebaseAuth.getInstance().currentUser
         var email = user?.email
         binding.user.setText("$email")
+        var uid=FirebaseAuth.getInstance().currentUser?.uid
 
-
+       /// notes adding function
         binding.addbtn.setOnClickListener {
 
             var intent = Intent(this, AddNotesPage::class.java)
-            intent.putExtra("id", id)
             startActivity(intent)
-
         }
 
+
+        //logout button
         binding.Logout.setOnClickListener {
 
             val alert = AlertDialog.Builder(this)
@@ -59,56 +69,31 @@ import kotlinx.coroutines.withContext
         }
 
         binding.rec.layoutManager = LinearLayoutManager(this)
-        fetchdata(id!!)
 
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-        //Firebase current user id
-        var user = FirebaseAuth.getInstance().currentUser?.uid
-        //method to fetch the data....
-        fetchdata(user!!)
+        notesviewModel=ViewModelProvider(this).get(NotesViewModel::class.java)
 
 
-    }
+        notesviewModel.getAll(binding.rec,uid!!).observe(this, Observer { notesList ->
+            if (notesList.isNullOrEmpty()) {
+                // If the list is empty, show a message
+                binding.result.visibility = View.VISIBLE
+                binding.result.text = "There are no notes available"
+                binding.rec.visibility = View.GONE
+            } else {
+                // If there are notes, hide the message and show the RecyclerView
+                binding.result.visibility = View.GONE
+                binding.rec.visibility = View.VISIBLE
 
-    fun fetchdata(id: String) {
-        var db = NoteDataBase.getInstances(applicationContext)
-        var notedao = db!!.NoteDao()
-
-        GlobalScope.launch {
-             var list = notedao.getAll(id!!)
-
-            Log.d("mukesh", "$list")
-
-
-            //
-            withContext(Dispatchers.Main)
-            {
-                if(!list.isEmpty()) {
-                    binding.result.visibility= View.GONE
-                    binding.rec.visibility=View.VISIBLE
-                    var adapter1 = recycleAdapter(list)
-                    Log.d("mukeshad", "$adapter1")
-                    binding.rec.adapter = adapter1
-                }else
-                {
-
-                    binding.rec.visibility=View.GONE
-                    binding.result.visibility=View.VISIBLE
-                    Log.d("mukesh","no")
-                   // binding.result.setText("Hey Make Your Notes")
-                }
-
+                // Create and set the adapter
+                var list = recycleAdapter(notesList, notesviewModel)
+                Log.d("mukesh11", "$list")
+                binding.rec.adapter = list
             }
+        })
 
 
 
-        }
+
 
     }
-
 }

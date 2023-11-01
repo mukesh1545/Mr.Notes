@@ -1,13 +1,12 @@
-package com.example.mrnotes
+package com.example.mrnotes.Activites
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import com.google.firebase.Firebase
+import com.example.mrnotes.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class splash : AppCompatActivity() {
 
@@ -23,7 +22,7 @@ class splash : AppCompatActivity() {
             {
 
 
-                var intent=Intent(this,NotePage::class.java)
+                var intent=Intent(this, NotePage::class.java)
                 intent.putExtra("id",user)
                 startActivity(intent)
             }

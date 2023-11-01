@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".splash"
+    tools:context=".Activites.splash"
     android:background="#03E2FF"
     android:orientation="vertical">
 

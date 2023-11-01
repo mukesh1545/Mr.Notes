@@ -1,15 +1,12 @@
-package com.example.mrnotes
+package com.example.mrnotes.Activites
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.util.Patterns
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.media3.common.util.Log
 import com.example.mrnotes.databinding.ActivityLoginPageBinding
 import com.google.firebase.auth.FirebaseAuth
 

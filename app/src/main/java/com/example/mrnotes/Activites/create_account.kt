@@ -1,24 +1,13 @@
-package com.example.mrnotes
+package com.example.mrnotes.Activites
 
 import android.content.Intent
-import android.hardware.camera2.CaptureResult.Key
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.text.TextWatcher
-import android.text.method.KeyListener
-import android.util.Log
 import android.util.Patterns
-import android.view.KeyEvent
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import com.example.mrnotes.databinding.CreateAccountBinding
 import com.google.firebase.auth.FirebaseAuth
-import java.util.regex.Pattern
 
 class create_account : AppCompatActivity() {
     private lateinit var binding: CreateAccountBinding
@@ -39,7 +28,7 @@ class create_account : AppCompatActivity() {
 
         }
         binding.Loginbtn.setOnClickListener {
-            var intent= Intent(this,Login_Page::class.java)
+            var intent= Intent(this, Login_Page::class.java)
             startActivity(intent)
             Toast.makeText(this,"Login_Page",Toast.LENGTH_SHORT).show()
 
