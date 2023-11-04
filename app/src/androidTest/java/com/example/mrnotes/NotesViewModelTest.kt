@@ -1,6 +1,5 @@
 package com.example.mrnotes
 
-import androidx.lifecycle.LiveData
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -39,60 +38,113 @@ class NotesViewModelTest {
         Database.close()
     }
 
-
-
-    @Test
-    fun insert()= runBlocking {
-        Dao.insert(NoteApp(1,"bejbievb","mukesh","content"))
-        var all=Dao.getdetails(1)
-        assertThat(all).isEqualTo(NoteApp(1,"bejbievb","mukesh","content"))
+   @Test
+    fun displayAllNotes_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        val all=Dao.getAllByList()
+        assertThat(all).contains(NoteApp(1,"Id1","Test1","content1"))
     }
     @Test
-    fun display()= runBlocking {
-        Dao.insert(NoteApp(1,"id1","harish","content1"))
-        var all=Dao.getAllByList()
-        assertThat(all).contains(NoteApp(1,"id1","harish","content1"))
-
-
+    fun insert_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        val all=Dao.getdetails(1)
+        assertThat(all).isEqualTo(NoteApp(1,"Id1","Test1","content1"))
     }
     @Test
-    fun Delete()= runBlocking {
-        Dao.insert(NoteApp(1,"bejbievb","mukesh","content"))
-        Dao.Delete(1)
-        var all=Dao.getdetails(1)
-        assertThat(all).isNull()
-
+    fun update_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        Dao.Update(NoteApp(1,"Id2","Test1","content1"))
+        val all=Dao.getdetails(1)
+        assertThat(all).isEqualTo(NoteApp(1,"Id2","Test1","content1"))
     }
     @Test
-    fun update ()= runBlocking {
-        Dao.insert(NoteApp(1,"kumar","harish","Good boy"))
-        Dao.Update(NoteApp(1,"mukesh","harish","Good boy"))
-        var all=Dao.getdetails(1)
-        assertThat(all).isEqualTo(NoteApp(1,"mukesh","harish","Good boy"))
-    }
-    @Test
-    fun ListOfDeleteId()= runBlocking {
-        Dao.insert(NoteApp(1,"kumar","harish","Good boy1"))
-        Dao.insert(NoteApp(2,"kum","mukesh","Good boy2"))
-        Dao.insert(NoteApp(3,"ku","sathish","Good boy3"))
+    fun DeleteIdOfList_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        Dao.insert(NoteApp(2,"Id1","Test1","content1"))
+        Dao.insert(NoteApp(3,"Id1","Test1","content1"))
 
-        var items= mutableListOf<Int>()
+        val items= mutableListOf<Int>()
         items.add(1)
         items.add(2)
         items.add(3)
 
         Dao.multipleDelete(items)
-        var all=Dao.getdetails(1)
+        val all=Dao.getdetails(1)
         assertThat(all).isNull();
-        var all1=Dao.getdetails(2)
+        val all1=Dao.getdetails(2)
         assertThat(all1).isNull();
-        var all2=Dao.getdetails(2)
+        val all2=Dao.getdetails(3)
         assertThat(all2).isNull();
     }
     @Test
-    fun displayNullNotes()= runBlocking {
-        var all=Dao.getAllByList()
+    fun displayNull_theNotes()= runBlocking {
+        val all=Dao.getAllByList()
         assertThat(all).isEmpty()
+    }
+    @Test
+    fun DisplayNotesBy_id()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        val all=Dao.getdetails(1)
+        assertThat(all).isEqualTo(NoteApp(1,"Id1","Test1","content1"))
+
+    }
+
+    @Test
+    fun Check_DoesNotContains_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        val all=Dao.getAllByList()
+        assertThat(all).doesNotContain(NoteApp(2,"id1","Test1","content1"))
+
+    }
+    @Test
+    fun check_DisplayNotesBy_id()= runBlocking {
+        Dao.insert(NoteApp(2,"Id1","Test1","Content1"))
+        val all=Dao.getdetails(1)
+        assertThat(all).isNotEqualTo(NoteApp(1,"Id1","Test1","Content1"))
+
+    }
+    @Test
+    fun check_doesInsert_theNotes()= runBlocking {
+        val all=Dao.getdetails(1)
+        assertThat(all).isNotEqualTo(NoteApp(1,"Id1","Test","content1"))
+    }
+    @Test
+    fun check_doesNoteUpdate_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        Dao.Update(NoteApp(1,"Id","Test1","content1"))
+        val all=Dao.getdetails(1)
+        assertThat(all).isNotEqualTo(NoteApp(1,"Id1","Test1","content1"))
+    }
+    @Test
+    fun check_doesNotDisplayNull_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","Content1"))
+        val all=Dao.getAllByList()
+        assertThat(all).isNotEmpty()
+
+    }
+    fun check_ListOfDeleteId_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"Id1","Test1","content1"))
+        Dao.insert(NoteApp(2,"Id2","Test2","content2"))
+        Dao.insert(NoteApp(3,"Id3","Test3","content3"))
+
+        val items= mutableListOf<Int>()
+        items.add(3)
+        items.add(4)
+        items.add(5)
+
+        Dao.multipleDelete(items)
+        val all=Dao.getdetails(1)
+        assertThat(all).isNotNull()
+        val all1=Dao.getdetails(2)
+        assertThat(all1).isNotNull()
+        val all2=Dao.getdetails(2)
+        assertThat(all2).isNotNull()
+    }
+    fun check_displayAllNotes_theNotes()= runBlocking {
+        Dao.insert(NoteApp(1,"id1","Test1","content1"))
+        Dao.insert(NoteApp(2,"id2","Test2","content2"))
+        val all=Dao.getAllByList()
+        assertThat(all).contains(NoteApp(1,"id1","harish","content1"))
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.mrnotes.RecycleView
 
+import NotesViewModel
 import android.app.AlertDialog
 import android.content.Intent
 import android.util.Log
@@ -8,19 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.compose.runtime.simulateHotReload
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mrnotes.Activites.AddNotesPage
 import com.example.mrnotes.R
 import com.example.mrnotes.RoomData.NoteApp
-import com.example.mrnotes.ViewModel.NotesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -169,7 +165,7 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
         builder.setPositiveButton("Yes") { dialog, which ->
 
             CoroutineScope(Dispatchers.IO).launch {
-                viewModel.delete(view, id)
+                viewModel.delete(id)
 
                 withContext(Dispatchers.Main) {
                     Toast.makeText(view.context, "Note Deleted", Toast.LENGTH_LONG).show()

@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NotesRepository(private val context: Context) {
+class NotesRep(private val context: Context) {
 
     private val noteDao = NoteDataBase.getInstances(context)!!.NoteDao()
 
