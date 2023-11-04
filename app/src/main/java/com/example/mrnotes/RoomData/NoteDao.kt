@@ -24,6 +24,11 @@ interface NoteDao {
 
     @Query("SELECT * FROM  notes  where Uid like :User  ORDER BY id DESC")
     fun getAll(User:String):LiveData<List<NoteApp>>
+    @Query("SELECT * FROM  notes  order by id desc")
+    fun getAllByList (): List<NoteApp>
+
+    @Query("DELETE FROM notes WHERE id IN (:userIds)")
+    suspend fun multipleDelete(userIds:List<Int>)
 
 
 }

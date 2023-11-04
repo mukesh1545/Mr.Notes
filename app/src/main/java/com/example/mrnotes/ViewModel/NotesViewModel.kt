@@ -2,6 +2,7 @@ package com.example.mrnotes.ViewModel
 
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +10,9 @@ import com.example.mrnotes.RoomData.NoteApp
 import com.example.mrnotes.RoomData.NoteDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 
 class NotesViewModel: ViewModel() {
@@ -49,5 +51,16 @@ class NotesViewModel: ViewModel() {
         return db
 
     }
+    fun deletebyIds(context: Context,UserId:List<Int>)
+    {
+        Log.d("mukeshdeleted","$UserId")
+        CoroutineScope(Dispatchers.IO).launch {
+            NoteDataBase.getInstances(context)!!.NoteDao().multipleDelete(UserId)
+        }
+    }
+//    fun getAllByList():List<NoteApp>
+//    {
+//
+//    }
 
 }

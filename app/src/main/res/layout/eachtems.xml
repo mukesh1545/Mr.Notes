@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/view"
+    android:id="@+id/relative"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="160dp"
     android:layout_marginLeft="20dp"
     android:layout_marginTop="20dp"
     android:layout_marginRight="20dp"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="20dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="15dp"
     app:layout_goneMarginBottom="20dp">
 
     <RelativeLayout
+        android:id="@+id/Relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded">
@@ -63,11 +64,11 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_below="@id/line"
-            android:singleLine="true"
             android:layout_marginTop="-14dp"
             android:background="@drawable/eachitemview"
             android:hint="Content"
             android:padding="19dp"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="18dp" />
 

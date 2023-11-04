@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [NoteApp::class], version = 2, exportSchema = false)
-abstract  class NoteDataBase :RoomDatabase() {
+ abstract class NoteDataBase :RoomDatabase() {
 
     companion object{
         private var INSTANCE:NoteDataBase?=null
@@ -24,20 +24,9 @@ abstract  class NoteDataBase :RoomDatabase() {
                 }
                 return INSTANCE
             }
-
             return INSTANCE
-
         }
-
-
-
-
     }
 
     abstract  fun NoteDao():NoteDao
-
-
-
-
-
 }

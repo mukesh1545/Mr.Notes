@@ -117,3 +117,22 @@ dependencies {
     // optional - Test helpers for Lifecycle runtime
     testImplementation ("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
 }
+dependencies {
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("com.google.truth:truth:1.0.1")
+}
+dependencies {
+    testImplementation("junit:junit:4.12")// Unit testing dependencies
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.8.22")
+
+    // Android testing dependencies
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+
+    // LiveData testing dependencies
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+}
+
