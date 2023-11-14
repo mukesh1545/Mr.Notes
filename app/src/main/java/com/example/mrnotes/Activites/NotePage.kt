@@ -1,6 +1,6 @@
         package com.example.mrnotes.Activites
 
-        import NotesRep
+        import NotesRepository
         import NotesViewModel
         import android.content.Intent
         import androidx.appcompat.app.AppCompatActivity
@@ -14,13 +14,16 @@
         import androidx.recyclerview.widget.LinearLayoutManager
         import com.example.mrnotes.RecycleView.recycleAdapter
         import com.example.mrnotes.RoomData.NoteApp
+        import com.example.mrnotes.RoomData.NoteDao
         import com.example.mrnotes.RoomData.NoteDataBase
         import com.example.mrnotes.ViewModel.NotesRepFactory
         import com.example.mrnotes.databinding.ActivityNotePageBinding
         import com.google.firebase.auth.FirebaseAuth
         import kotlinx.coroutines.CoroutineScope
         import kotlinx.coroutines.Dispatchers
+        import kotlinx.coroutines.GlobalScope
         import kotlinx.coroutines.launch
+        import kotlinx.coroutines.runBlocking
         import kotlinx.coroutines.withContext
 
         class NotePage : AppCompatActivity() , recycleAdapter.MulipleData {
@@ -29,28 +32,22 @@
             //intilaizing
             private lateinit var binding: ActivityNotePageBinding
             private var adapter: recycleAdapter? = null
+            private lateinit var db:NoteDataBase
             private lateinit var notesviewModel: NotesViewModel
-            private lateinit var repo:NotesRep
+            private lateinit var repo:NotesRepository
 
             override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
                 binding = ActivityNotePageBinding.inflate(layoutInflater)
                 setContentView(binding.root)
 
-                //Displaying the Email id
-                val user = FirebaseAuth.getInstance().currentUser
-                val email = user?.email
-                binding.user.setText("$email")
-                val uid = FirebaseAuth.getInstance().currentUser?.uid
-
+                //Displaying the Email id binding.user.setText("$email"
                 /// notes adding function
                 binding.addbtn.setOnClickListener {
 
                     val intent = Intent(this, AddNotesPage::class.java)
                     startActivity(intent)
                 }
-
-
                 //logout button
                 binding.Logout.setOnClickListener {
 
@@ -59,18 +56,20 @@
                         .setMessage("Do you want to Logout ?")
                         .setPositiveButton("Yes")
                         { p0, p1 ->
-                            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
-                            FirebaseAuth.getInstance().signOut()
-                            startActivity(Intent(this@NotePage, Login_Page::class.java))
-                            finish()
+//                            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+//                            FirebaseAuth.getInstance().signOut()
+//                            startActivity(Intent(this@NotePage, Login_Page::class.java))
+                        //    finish()
                         }
                         .setNegativeButton("No", null)
                         .show()
                 }
+                var db=NoteDataBase.getInstances(this)
+                var Dao=db!!.NoteDao()
                 binding.rec.layoutManager = LinearLayoutManager(this)
-                repo = NotesRep(applicationContext)
+                repo = NotesRepository(Dao)
                 notesviewModel = ViewModelProvider(this,NotesRepFactory(repo)).get(NotesViewModel::class.java)
-                notesviewModel.getAll(uid!!).observe(this, Observer { notesList ->
+                notesviewModel.getAll("0").observe(this, Observer { notesList ->
                     if (notesList.isNullOrEmpty()) {
                         // If the list is empty, show a message
                         binding.result.visibility = View.VISIBLE
@@ -87,7 +86,27 @@
                         binding.rec.adapter = list
                     }
                 })
+
+                binding.DeleteAllbtn.setOnClickListener {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Confirmation")
+                        .setMessage("Are you sure to delete All the Notes")
+                        .setNegativeButton("No", null)
+                        .setPositiveButton("Yes") { _, _ ->
+                            GlobalScope.launch {
+                                notesviewModel.DeleteAll()
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(this@NotePage, "All Notes Deleted", Toast.LENGTH_SHORT).show()
+                                    builder.create().dismiss() // Dismiss the dialog
+                                }
+                            }
+                        }
+                        .show()
+                }
+
             }
+
+
 
             override fun getselectedItems(mu: MutableList<Int>) {
 

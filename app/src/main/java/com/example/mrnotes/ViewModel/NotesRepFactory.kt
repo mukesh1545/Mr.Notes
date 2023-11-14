@@ -1,11 +1,11 @@
 package com.example.mrnotes.ViewModel
 
-import NotesRep
+import NotesRepository
 import NotesViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class NotesRepFactory(private val repository: NotesRep) : ViewModelProvider.Factory {
+class NotesRepFactory(private val repository: NotesRepository) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NotesViewModel::class.java)) {

@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
+    android:id="@+id/Note"
     android:layout_height="match_parent">
 
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
 
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/addbtn"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/addbtn"
         app:layout_constraintStart_toEndOf="@+id/rec"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,8 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:padding="16dp"
                 android:background="@drawable/title"
+                android:padding="16dp"
                 android:text="Note Pro"
                 android:textColor="#06CDE6"
                 android:textSize="20dp"
@@ -44,29 +46,32 @@
 
             <ImageButton
                 android:id="@+id/Logout"
-                android:layout_marginTop="17dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:tint="#F9FAFA"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="17dp"
 
-                android:layout_marginLeft="130dp"
                 android:background="#06CDE6"
-                android:src="@drawable/baseline_logout_24" />
+                android:src="@drawable/baseline_logout_24"
+                app:tint="#F9FAFA" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/start"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/eachitemview"
+            android:layout_marginLeft="11dp"
             android:layout_marginTop="15sp"
+            android:padding="3dp"
+            android:background="@drawable/eachitemview"
             android:orientation="horizontal">
 
             <ImageButton
                 android:layout_width="35dp"
-                android:layout_height="40dp"
+                android:layout_height="44dp"
                 android:background="#06CDE6"
+                android:layout_weight="1"
+
                 android:src="@drawable/baseline_person_add_alt_1_24" />
 
             <TextView
@@ -74,15 +79,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
-                android:padding="12dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:ems="10"
                 android:layout_marginTop="0dp"
-                android:textColor="#FFFDFD"
                 android:background="#06CDE6"
+                android:ellipsize="end"
+                android:ems="6"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="#FFFDFD"
                 android:textSize="15dp"
                 android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/DeleteAllbtn"
+                android:layout_marginLeft="-89dp"
+                android:layout_width="wrap_content"
+                android:background="#06CDE6"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/baseline_delete_outline_24" />
 
         </LinearLayout>
 
@@ -90,28 +105,11 @@
     </RelativeLayout>
 
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="180dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -120,14 +118,16 @@
         android:id="@+id/addbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="476dp"
-        android:clickable="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="64dp"
         android:backgroundTint="#00BCD4"
+        android:clickable="true"
+        android:contextClickable="false"
         android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView3" />
+        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/Mutlidelete"
@@ -147,13 +147,13 @@
         android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="244dp"
         android:text="Make Notes and Make it Easy"
         android:textColor="#090000"
         android:textSize="15dp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/addbtn"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

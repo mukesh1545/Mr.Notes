@@ -1,5 +1,6 @@
 package com.example.mrnotes
 
+import androidx.annotation.DisplayContext
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -15,8 +16,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 
+
 @RunWith(AndroidJUnit4::class)
-@SmallTest
 class NotesViewModelTest {
 
 
@@ -122,6 +123,7 @@ class NotesViewModelTest {
         assertThat(all).isNotEmpty()
 
     }
+    @Test
     fun check_ListOfDeleteId_theNotes()= runBlocking {
         Dao.insert(NoteApp(1,"Id1","Test1","content1"))
         Dao.insert(NoteApp(2,"Id2","Test2","content2"))
@@ -140,11 +142,11 @@ class NotesViewModelTest {
         val all2=Dao.getdetails(2)
         assertThat(all2).isNotNull()
     }
+    @Test
     fun check_displayAllNotes_theNotes()= runBlocking {
         Dao.insert(NoteApp(1,"id1","Test1","content1"))
-        Dao.insert(NoteApp(2,"id2","Test2","content2"))
         val all=Dao.getAllByList()
-        assertThat(all).contains(NoteApp(1,"id1","harish","content1"))
+        assertThat(all).contains(NoteApp(1,"id1","Test1","content1"))
     }
 
 

@@ -15,6 +15,8 @@ interface NoteDao {
     fun insert(note:NoteApp)
     @Update
     fun Update(note: NoteApp)
+    @Query("delete from notes")
+    fun DeleteAll()
 
     @Query("Delete from Notes where id like:userId")
     fun Delete(userId:Int)
@@ -28,7 +30,7 @@ interface NoteDao {
     fun getAllByList (): List<NoteApp>
 
     @Query("DELETE FROM notes WHERE id IN (:userIds)")
-    suspend fun multipleDelete(userIds:List<Int>)
+     fun multipleDelete(userIds:List<Int>)
 
 
 }

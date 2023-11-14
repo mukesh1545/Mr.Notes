@@ -1,14 +1,14 @@
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.mrnotes.RoomData.NoteApp
+import com.example.mrnotes.RoomData.NoteDao
 import com.example.mrnotes.RoomData.NoteDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NotesRep(private val context: Context) {
+class NotesRepository(private val noteDao: NoteDao) {
 
-    private val noteDao = NoteDataBase.getInstances(context)!!.NoteDao()
 
     fun getAllNotes(userId: String): LiveData<List<NoteApp>> {
         return noteDao.getAll(userId)
@@ -41,4 +41,10 @@ class NotesRep(private val context: Context) {
             noteDao.multipleDelete(userIds)
         }
     }
-}
+        fun deleteAllNotes() {
+            CoroutineScope(Dispatchers.IO).launch {
+                noteDao.DeleteAll()
+            }
+        }
+    }
+

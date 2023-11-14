@@ -1,9 +1,8 @@
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.mrnotes.RoomData.NoteApp
 
-class NotesViewModel(private val repository: NotesRep) : ViewModel() {
+class NotesViewModel(private val repository: NotesRepository) : ViewModel() {
 
     fun getAll(user: String): LiveData<List<NoteApp>> {
         return repository.getAllNotes(user)
@@ -19,6 +18,9 @@ class NotesViewModel(private val repository: NotesRep) : ViewModel() {
 
     fun update(note: NoteApp) {
         repository.updateNote(note)
+    }
+    fun DeleteAll() {
+        repository.deleteAllNotes()
     }
 
     fun getDetailsById(id: Int): NoteApp {

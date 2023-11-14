@@ -20,12 +20,12 @@
         <activity
             android:name=".Activites.NotePage"
             android:exported="false" />
-        <activity
-            android:name=".Activites.Login_Page"
-            android:exported="false" />
-        <activity
-            android:name=".Activites.create_account"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Activites.Login_Page"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Activites.create_account"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Activites.splash"
             android:exported="true">

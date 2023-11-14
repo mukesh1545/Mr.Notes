@@ -7,7 +7,8 @@
     android:gravity="center"
     tools:context=".Activites.splash"
     android:background="#03E2FF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/splash">
 
 
     <TextView
@@ -27,6 +28,7 @@
         android:layout_below="@+id/Notes"
         android:indeterminateTint="#FFFFFF"
         android:layout_marginTop="18dp"
+        android:id="@+id/Bar"
         android:foregroundGravity="center_horizontal" />
 
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -29,13 +30,10 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
 
         var tittle: TextView = view.findViewById(R.id.TittleBar)
         var content: TextView = view.findViewById(R.id.contentBar)
-        var cardView: CardView = view.findViewById(R.id.relative)
+        var cardView: RelativeLayout = view.findViewById(R.id.Relative)
         var update: ImageButton = view.findViewById(R.id.updateBtn)
         var delete: ImageButton = view.findViewById(R.id.deletebtn)
-        var view2: LinearLayout = view.findViewById(R.id.line)
-
-        init {
-        }
+        var view2:CardView = view.findViewById(R.id.relative)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewItems {
@@ -75,22 +73,8 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
 
         }
 
-
-        // view the notes
-        holder.view2.setOnClickListener {
-            if (!(holder.adapterPosition in mu)) {
-                var intent = Intent(holder.itemView.context, AddNotesPage::class.java).apply {
-                    var id = list1[position].id
-                    putExtra("View", note.id)
-                    Log.d("mukesh id kkk", "${id}")
-                }
-                holder.itemView.context.startActivity(intent)
-                true
-            }
-        }
-
         holder.cardView.setOnLongClickListener {
-            if (mu.size == 0) {
+            if (mu.isEmpty()) {
 
                 holder.update.visibility = View.GONE
                 holder.delete.visibility = View.GONE
@@ -101,7 +85,7 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
 
                 Log.d(" Mukesh Add", "${mu.size}")
 
-                holder.cardView.setBackgroundColor(
+                holder.view2.setBackgroundColor(
                     ContextCompat.getColor(
                         it.context,
                         R.color.sucess
@@ -114,47 +98,54 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
 
 
         holder.cardView.setOnClickListener {
-            if (!mu.isEmpty()) {
 
-                holder.update.visibility=View.GONE
-                holder. delete.visibility=View.GONE
+            if (mu.isEmpty()) {
+                var intent = Intent(holder.itemView.context, AddNotesPage::class.java).apply {
+                    var id = list1[position].id
+                    putExtra("View", note.id)
+                    Log.d("mukesh id kkk", "${id}")
+                }
+                holder.itemView.context.startActivity(intent)
+            } else {
 
-                if ( mu.contains(holder.adapterPosition)) {
+                holder.update.visibility = View.GONE
+                holder.delete.visibility = View.GONE
 
-                    holder.update.visibility=View.VISIBLE
-                    holder. delete.visibility=View.VISIBLE
-                    Log.d("mukesh remove before","$mu")
+                if (mu.contains(holder.adapterPosition)) {
+
+                    holder.update.visibility = View.VISIBLE
+                    holder.delete.visibility = View.VISIBLE
+                    Log.d("mukesh remove before", "$mu")
                     mu.remove(holder.adapterPosition)
                     mulipleData.getselectedItems(mu)
 
 
-                    Log.d("mukesh Remove","$mu")
+                    Log.d("mukesh Remove", "$mu")
 
-                    holder.cardView.setBackgroundColor(
+                    holder.view2.setBackgroundColor(
                         ContextCompat.getColor(
                             it.context,
                             R.color.white
                         )
                     )
 
-                }
-                else
-                {
+                } else {
                     mu.add(holder.adapterPosition)
                     mulipleData.getselectedItems(mu)
-                    Log.d("data","$mu")
+                    Log.d("data", "$mu")
 
-                    holder.cardView.setBackgroundColor(
+                    holder.view2.setBackgroundColor(
                         ContextCompat.getColor(
                             it.context,
                             R.color.sucess
                         )
                     )
-                    Log.d("mukesh_Data","$mu")
+                    Log.d("mukesh_Data", "$mu")
                 }
             }
         }
     }
+
 
 
     fun createAlertDialog(view: View, id: Int) {
@@ -177,9 +168,7 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
             }
         }
 
-        builder.setNegativeButton("No") { dialog, which ->
-            // Do nothing or handle the cancellation
-        }
+        builder.setNegativeButton("No",null)
 
         val dialog = builder.create()
         dialog.show()
@@ -189,16 +178,13 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
 
     interface MulipleData
     {
-        fun getselectedItems(mu:MutableList<Int>)
-        {
 
-        }
+          fun getselectedItems(mu:MutableList<Int>)
 
     }
     fun set()
     {
         mu.clear()
-        Log.d("mukeshset","$mu")
     }
 
 
