@@ -30,7 +30,7 @@ class AddNotesPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddNotesPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var uid = "0"
+        var uid = FirebaseAuth.getInstance().currentUser!!.uid
         var newtittle = binding.Tittle.text.toString()
         var newcontent = binding.content.text.toString()
         val noteDao = NoteDataBase.getInstances(applicationContext)!!.NoteDao()

@@ -1,4 +1,4 @@
-package com.example.mrnotes
+package com.example.mrnotes.Enitiy
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.mrnotes.RoomData.NoteApp

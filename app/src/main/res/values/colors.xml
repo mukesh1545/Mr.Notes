@@ -7,6 +7,6 @@
     <color name="icons">#4F5D1B</color>
     <color name="background">#5C4D5D
     </color>
-    <color name="Error">#FF0000</color>
-    <color name="sucess">#19FF00</color>
+    <color name="Error">#FFFFFF</color>
+    <color name="sucess">#9AE5EE</color>
 </resources>

@@ -67,7 +67,7 @@ android {
     (this as? Test)?.configure<ExtensionContainer> {
         // Define which tasks should be covered by JaCoCo
         extensions.getByType(JacocoTaskExtension::class).apply {
-            isIncludeNoLocationClasses = true
+            isIncludeNoLocationClasses = false
 
         }
     }

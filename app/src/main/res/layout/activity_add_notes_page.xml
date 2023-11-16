@@ -119,10 +119,10 @@
         android:layout_marginTop="48dp"
         android:clickable="true"
 
-        android:visibility="visible"
+        android:visibility="gone"
         app:backgroundTint="#00BCD4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintHorizontal_bias="0.834"
         app:layout_constraintStart_toEndOf="@+id/AddNote"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_save_alt_24" />

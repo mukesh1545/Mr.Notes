@@ -15,9 +15,28 @@ class splash : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         Handler().postDelayed({
             //val user = FirebaseAuth.getInstance().updateCurrentUser()
+            var user=FirebaseAuth.getInstance().currentUser?.uid
+            var Emailvalidation:Boolean=( FirebaseAuth.getInstance().currentUser?.isEmailVerified() == true)
+            Log.d("mukesh","$user  $Emailvalidation")
+            if (user != null && Emailvalidation )
+            {
+
+
                 var intent=Intent(this, NotePage::class.java)
+                intent.putExtra("id",user)
                 startActivity(intent)
+            }
+            else
+            {
+
+
+                val intent = Intent(this, Login_Page::class.java)
+                startActivity(intent)
+
+            }
             finish()
+
+
         },1000)
     }
 }

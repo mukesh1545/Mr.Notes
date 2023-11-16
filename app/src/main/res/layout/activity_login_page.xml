@@ -97,7 +97,7 @@
             android:layout_marginEnd="5dp"
             android:layout_below="@id/Login_Password"/>
         <Button
-            android:id="@+id/btn"
+            android:id="@+id/Login_btn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/forgetPAssword"
@@ -126,7 +126,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="15dp"
-            android:layout_below="@+id/btn"
+            android:layout_below="@+id/Login_btn"
             android:foregroundGravity="center"
             android:id="@+id/ProgrssBar"
             android:layout_centerHorizontal="true"

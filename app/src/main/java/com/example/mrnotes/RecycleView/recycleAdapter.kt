@@ -3,6 +3,7 @@ package com.example.mrnotes.RecycleView
 import NotesViewModel
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -34,12 +35,12 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
         var update: ImageButton = view.findViewById(R.id.updateBtn)
         var delete: ImageButton = view.findViewById(R.id.deletebtn)
         var view2:CardView = view.findViewById(R.id.relative)
+        var colcor:LinearLayout=view.findViewById(R.id.lin)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewItems {
 
-        var v: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.eachtems, parent, false)
+        var v: View = LayoutInflater.from(parent.context).inflate(R.layout.eachtems, parent, false)
 
         return ViewItems(v,mulipleData)
 
@@ -55,6 +56,9 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
         holder.tittle.text = note.Name.toString()
         holder.content.text = note.content.toString()
         //holder.content.text=note.content.toString()
+        val color = getColorForItem(position)
+
+        holder.itemView.setBackgroundColor(color)
 
         holder.update.setOnClickListener {
             var intent = Intent(holder.itemView.context, AddNotesPage::class.java).apply {
@@ -88,7 +92,7 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
                 holder.view2.setBackgroundColor(
                     ContextCompat.getColor(
                         it.context,
-                        R.color.sucess
+                        R.color.Error
                     )
                 )
 
@@ -121,13 +125,8 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
 
 
                     Log.d("mukesh Remove", "$mu")
+                        holder.itemView.setBackgroundColor(getColorForItem(position))
 
-                    holder.view2.setBackgroundColor(
-                        ContextCompat.getColor(
-                            it.context,
-                            R.color.white
-                        )
-                    )
 
                 } else {
                     mu.add(holder.adapterPosition)
@@ -137,7 +136,7 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
                     holder.view2.setBackgroundColor(
                         ContextCompat.getColor(
                             it.context,
-                            R.color.sucess
+                            R.color.Error
                         )
                     )
                     Log.d("mukesh_Data", "$mu")
@@ -146,6 +145,14 @@ class recycleAdapter(var list1:List<NoteApp>,private var viewModel:NotesViewMode
         }
     }
 
+    private fun getColorForItem(position: Int): Int {
+        // Customize this logic to provide different colors based on your criteria
+        return if (position % 2 == 0) {
+            Color.parseColor("#FFC0CB") // Example color: Light Pink
+        } else {
+            Color.parseColor("#87CEFA") // Example color: Light Sky Blue
+        }
+    }
 
 
     fun createAlertDialog(view: View, id: Int) {

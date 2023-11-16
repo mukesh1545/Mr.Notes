@@ -1,10 +1,8 @@
-package com.example.mrnotes
+package com.example.mrnotes.ViewModel
 
-import androidx.annotation.DisplayContext
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
 import com.example.mrnotes.RoomData.NoteApp
 import com.example.mrnotes.RoomData.NoteDao
 import com.example.mrnotes.RoomData.NoteDataBase
